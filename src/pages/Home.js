@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Search } from '../components/Search';
 import { Card } from '../components/Card';
+import { GithubContext } from '../context/github/githubContex';
+import { Spinner } from '../components/Spinner';
 
 export const Home = (props) => {
-    const cards = new Array(15).fill('').map((_, i) => i);
+    const { loading, users } = useContext(GithubContext);
 
     return (
         <React.Fragment>
@@ -13,11 +15,15 @@ export const Home = (props) => {
                 </div>
             </div>
             <div className="row pt-5">
-                {cards.map((card) => (
-                    <div key={card} className="col-sm-4 mb-3">
-                        <Card />
-                    </div>
-                ))}
+                {loading ? (
+                    <Spinner />
+                ) : (
+                    users.map((user) => (
+                        <div key={user.id} className="col-sm-6 col-lg-4 mb-3">
+                            <Card user={user} />
+                        </div>
+                    ))
+                )}
             </div>
         </React.Fragment>
     );
