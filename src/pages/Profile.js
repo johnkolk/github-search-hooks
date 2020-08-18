@@ -3,6 +3,7 @@ import { GithubContext } from '../context/github/githubContex';
 import { Spinner } from '../components/Spinner';
 import { Link } from 'react-router-dom';
 import { Image } from 'react-bootstrap';
+import { Repos } from '../components/Repos';
 
 export const Profile = ({ match }) => {
     const { getUser, getRepos, loading, user, repos } = useContext(
@@ -50,7 +51,7 @@ export const Profile = ({ match }) => {
                 </div>
                 <div className="col pl-4">
                     <div className="h2">{name}</div>
-                    <div className="mb-2">{bio}</div>
+                    {bio && <div className="mb-2">{bio}</div>}
                     <div className="badge badge-primary">
                         Followers: {followers}
                     </div>
@@ -79,7 +80,9 @@ export const Profile = ({ match }) => {
                 </div>
             </div>
             <hr />
-            <div className="row mt-5">{repos.join()}</div>
+            <div className="row mt-5">
+                <Repos repos={repos} />
+            </div>
         </div>
     );
 };

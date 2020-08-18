@@ -46,7 +46,7 @@ export const GithubState = ({ children }) => {
         setLoading();
         const response = await axios.get(
             urlWithCreds(
-                `https://api.github.com/users/${name}/repos?per_page=5&`,
+                `https://api.github.com/users/${name}/repos?per_page=10&`,
             ),
         );
         dispatch({ type: GET_REPOS, payload: response.data });
